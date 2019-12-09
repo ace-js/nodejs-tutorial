@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon --inspect app.js",
-    "dev:inspect": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "dev:inspect": "nodemon --inspect app.js"
   },
   "keywords": [],
   "author": "",
