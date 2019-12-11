@@ -10,6 +10,6 @@ module.exports = async (req, res) => {
 
         res.status(200).send(formatter(req.query, weather.currently, location))
     } catch (error) {
-        res.status(500).send(error)
+        res.status(500).send(error.message)
     }
 }
