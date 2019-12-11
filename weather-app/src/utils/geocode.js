@@ -1,7 +1,7 @@
 const rp = require('request-promise')
 const get = require('lodash.get')
 
-const config = require('../config.js')
+const config = require('../config')
 
 const geocode = async (placeName, placeType, country) => {
     try {
