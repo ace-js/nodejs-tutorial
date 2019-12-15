@@ -1,11 +1,11 @@
-const findUserByName = Database => async (name) => {
-    try {
-        return  await Database.collection('users').findOne({ name: name })
-    } catch (error) {
-        throw error
-    }
-}
+const { getDb } = require('./db')
 
 module.exports = {
-    findUserByName
+    findUserByName: async (name) => {
+        try {
+            return await getDb('users').findOne({ name: name })
+        } catch (error) {
+            throw error
+        }
+    }
 }

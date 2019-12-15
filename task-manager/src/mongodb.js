@@ -1,15 +1,15 @@
 // CRUD
-const {initDb, getDb} = require('./db/db')
+const { initDb } = require('./db/db')
 const Users = require('./db/Users')
 
-const runDb = () => {
-   initDb()
-   .then(async () => {
-       const makeFetchByName = Users.findUserByName(getDb())
-       const user = await makeFetchByName('Arnaud')
-       console.log(user);
-    })
-   .catch(error => console.log(error.message))
+const runDb = async () => {
+    try {
+        await initDb()
+        const user = await Users.findUserByName('Arnaud')
+        console.log('Result: ', user)
+    } catch (error) {
+        console.log(error.message)
+    }
 }
 
 runDb()
