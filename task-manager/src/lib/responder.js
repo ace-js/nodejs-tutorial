@@ -9,6 +9,7 @@ module.exports = {
             data: payload || {}
         })
     },
+
     error: (res, err = { code: 500, name: 'Internal Server', message: 'Something went wrong' }) => {
         let status = err.status || httpStatus.INTERNAL_SERVER_ERROR
 
