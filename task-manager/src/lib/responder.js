@@ -11,7 +11,7 @@ module.exports = {
     },
     error: (res, err = { code: 500, name: 'Internal Server', message: 'Something went wrong' }) => {
         let status = err.status || httpStatus.INTERNAL_SERVER_ERROR
-        console.log(err.code)
+
         const payload = {
             code: err.code,
             name: err.name,
@@ -27,7 +27,7 @@ module.exports = {
             status = httpStatus.BAD_REQUEST
             Object.assign(payload, {
                 code: httpStatus.BAD_REQUEST,
-                errors: err.errors.map(error => ({ field: error.field, messages: error.messages }))
+                errors: Object.keys(err.errors).map(key => ({ key, message: err.errors[key].message }))
             })
         }
 
