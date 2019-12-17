@@ -6,7 +6,7 @@ module.exports = {
     },
 
     getTaskUnCompletedCounter: async () => {
-        return await Task.find({completed: false}).count()
+        return await Task.find({ completed: false }).count()
     },
 
     getTask: async (id) => {
@@ -19,5 +19,9 @@ module.exports = {
 
     deleteTask: async (id) => {
         return await Task.findByIdAndDelete(id)
+    },
+
+    updateTask: async (id, task) => {
+        return await Task.findByIdAndUpdate(id, task)
     }
 }

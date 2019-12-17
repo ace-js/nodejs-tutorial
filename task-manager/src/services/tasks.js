@@ -28,10 +28,21 @@ module.exports = Task => ({
 
         if (!task) {
             return responder.error(res, {
-                status: httpStatus.NOT_FOUND
+                status: httpStatus.BAD_REQUEST
             })
         }
 
         return await Task.getTaskUnCompletedCounter()
+    },
+
+    makeUpdateTask: async (id, task, res) => {
+        const taskUpdated = await Task.updateTask(id, task)
+
+        if (!taskUpdated) {
+            return responder.error(res, {
+                status: httpStatus.BAD_REQUEST
+            })
+        }
+        return await Task.getTask(id)
     }
 })

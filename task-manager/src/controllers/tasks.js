@@ -40,9 +40,19 @@ const deleteTask = async (req, res) => {
     })
 }
 
+const updateTask = async (req, res) => {
+    const task = await tasksServices.makeUpdateTask(req.params.id, req.body, res)
+
+    responder.success(res, {
+        status: httpStatus.OK,
+        payload: { task }
+    })
+}
+
 module.exports = {
     getTasks,
     getTask,
     createTask,
-    deleteTask
+    deleteTask,
+    updateTask
 }

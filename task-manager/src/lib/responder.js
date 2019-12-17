@@ -12,7 +12,6 @@ module.exports = {
 
     error: (res, err = { code: 500, name: 'Internal Server', message: 'Something went wrong' }) => {
         let status = err.status || httpStatus.INTERNAL_SERVER_ERROR
-
         const payload = {
             code: err.code,
             name: err.name,
@@ -28,7 +27,9 @@ module.exports = {
             status = httpStatus.BAD_REQUEST
             Object.assign(payload, {
                 code: httpStatus.BAD_REQUEST,
-                errors: Object.keys(err.errors).map(key => ({ key, message: err.errors[key].message }))
+                errors: Array.isArray(err.errors)
+                ? err.errors.map(error => ({ key: error.field[0], message: error.messages[0]})) // express-validation error
+                : Object.keys(err.errors).map(key => ({ key, message: err.errors[key].message })) // mongoose validation error
             })
         }
 
