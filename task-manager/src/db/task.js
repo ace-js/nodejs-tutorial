@@ -1,27 +1,27 @@
-const Task = require('../models/task')
+const TaskModel = require('../models/task')
 
 module.exports = {
     getAll: async () => {
-        return await Task.find({})
+        return await TaskModel.find({})
     },
 
     getTaskUnCompletedCounter: async () => {
-        return await Task.find({ completed: false }).count()
+        return await TaskModel.find({ completed: false }).count()
     },
 
-    getTask: async (id) => {
-        return await Task.findById(id)
+    get: async (id) => {
+        return await TaskModel.findById(id)
     },
 
-    createTask: async (task) => {
-        return await Task.create(task)
+    create: async (task) => {
+        return await TaskModel.create(task)
     },
 
-    deleteTask: async (id) => {
-        return await Task.findByIdAndDelete(id)
+    update: async (id, task) => {
+        return await TaskModel.findByIdAndUpdate(id, task, { new: true, runValidators: true })
     },
 
-    updateTask: async (id, task) => {
-        return await Task.findByIdAndUpdate(id, task)
+    delete: async (id) => {
+        return await TaskModel.findByIdAndDelete(id)
     }
 }

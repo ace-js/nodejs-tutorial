@@ -9,7 +9,8 @@ module.exports = model('User', new Schema({
     },
     age: {
         type: Number,
-        min: [18, 'User is not an adult']
+        min: [18, 'User is not an adult'],
+        max: [110, 'User is too old']
     },
     email: {
         type: String,

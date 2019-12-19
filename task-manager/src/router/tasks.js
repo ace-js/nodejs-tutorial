@@ -8,6 +8,6 @@ router.get('/', handleAsyncFn(tasksController.getTasks))
 router.get('/:id', handleAsyncFn(tasksController.getTask))
 router.post('/', handleAsyncFn(tasksController.createTask))
 router.delete('/:id', handleAsyncFn(tasksController.deleteTask))
-router.put('/:id', handleAsyncFn(tasksController.updateTask))
+router.patch('/:id', handleAsyncFn(tasksController.updateTask))
 
 module.exports = router

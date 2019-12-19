@@ -1,6 +1,7 @@
 const httpStatus = require('http-status')
 
 const responder = require('../lib/responder')
+const validators = require('../lib/customValidators')
 const Task = require('../db/Task')
 const tasksServices = require('../services/tasks')(Task)
 
@@ -14,7 +15,13 @@ const getTasks = async (req, res) => {
 }
 
 const getTask = async (req, res) => {
-    const task = await tasksServices.makeFetchTask(req.params.id, res)
+    const task = await tasksServices.makeFetchTask(req.params.id)
+
+    if (!task) {
+        return responder.error(res, {
+            status: httpStatus.NOT_FOUND
+        })
+    }
 
     responder.success(res, {
         status: httpStatus.OK,
@@ -32,16 +39,32 @@ const createTask = async (req, res) => {
 }
 
 const deleteTask = async (req, res) => {
-    const count = await tasksServices.makeDeleteTask(req.params.id, res)
+    const task = await tasksServices.makeDeleteTask(req.params.id)
+
+    if (!task) {
+        return responder.error(res, {
+            status: httpStatus.NOT_FOUND
+        })
+    }
+     
+   const counter = await tasksServices.makeFetchUncompletedTaskCounter()
 
     responder.success(res, {
         status: httpStatus.OK,
-        payload: { count }
+        payload: { counter }
     })
 }
 
 const updateTask = async (req, res) => {
-    const task = await tasksServices.makeUpdateTask(req.params.id, req.body, res)
+    validators.updateValidation(['description', 'completed'], req.body, res)
+
+    const task = await tasksServices.makeUpdateTask(req.params.id, req.body)
+
+    if (!task) {
+        return responder.error(res, {
+            status: httpStatus.NOT_FOUND
+        })
+    }
 
     responder.success(res, {
         status: httpStatus.OK,

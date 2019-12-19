@@ -9,5 +9,7 @@ const router = Router()
 router.get('/', handleAsyncFn(usersController.getUsers))
 router.get('/:id', validate(schemes.getUser), handleAsyncFn(usersController.getUser))
 router.post('/', validate(schemes.createUser), handleAsyncFn(usersController.createUser))
+router.patch('/:id', validate(schemes.updateUser), handleAsyncFn(usersController.updateUser))
+router.delete('/:id', validate(schemes.deleteUser), handleAsyncFn(usersController.deleteUser))
 
 module.exports = router
