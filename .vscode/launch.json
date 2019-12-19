@@ -9,13 +9,16 @@
             "request": "launch",
             "name": "Weather app",
             "runtimeExecutable": "nodemon",
-            "program": "${workspaceFolder}/weather-app/app.js",
+            "program": "${workspaceFolder}/task-manager/src/index.js",
             "restart": true,
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "skipFiles": [
                 "<node_internals>/**"
-            ]
+            ],
+            "env": {
+                "ENVIRONMENT": "dev"
+            }
         }
     ]
 }

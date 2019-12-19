@@ -70,10 +70,20 @@ const deleteUser = async (req, res) => {
     })
 }
 
+const loginUser = async (req, res) => {
+    const user = await userServices.makeAuthentication(req.body.email, req.body.password)
+
+    responder.success(res, {
+        status: httpStatus.OK,
+        payload: { token: user.generateAuthToken() }
+    })
+}
+
 module.exports = {
     getUsers,
     getUser,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    loginUser
 }

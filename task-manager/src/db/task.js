@@ -17,8 +17,12 @@ module.exports = {
         return await TaskModel.create(task)
     },
 
-    update: async (id, task) => {
-        return await TaskModel.findByIdAndUpdate(id, task, { new: true, runValidators: true })
+    update: async (id, updateObj) => {
+        const task = await TaskModel.findById(id)
+
+        Object.keys(updateObj).forEach(key => task[key] = updateObj[key])
+
+        return await task.save()
     },
 
     delete: async (id) => {

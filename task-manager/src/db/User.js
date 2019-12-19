@@ -1,4 +1,5 @@
 const UserModel = require('../models/user')
+
 module.exports = {
     getAll: async () => {
         return await UserModel.find({})
@@ -12,11 +13,19 @@ module.exports = {
         return await UserModel.create(user)
     },
 
-    update: async (id, user) => {
-        return await UserModel.findByIdAndUpdate(id, user, { new: true, runValidators: true })
+    update: async (id, updateObj) => {
+        const user = await UserModel.findById(id)
+
+        Object.keys(updateObj).forEach(key => user[key] = updateObj[key])
+
+        return await user.save()
     },
 
     delete: async (id) => {
         return await UserModel.findByIdAndDelete(id)
     },
+
+    findByEmail: async (email) => {
+        return await UserModel.findOne({ email })
+    }
 }

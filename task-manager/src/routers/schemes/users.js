@@ -10,8 +10,8 @@ const getUser = {
 const createUser = {
     body: {
         name: Joi.string().required(),
-        email: Joi.string().required(),
         age: Joi.number().required(),
+        email: Joi.string().required(),
         password: Joi.string().required()
     }
 }
@@ -34,9 +34,17 @@ const deleteUser = {
     }
 }
 
+const loginUser = {
+    body: {
+        email: Joi.string().required(),
+        password: Joi.string().required()
+    }
+}
+
 module.exports = {
     getUser,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    loginUser
 }
