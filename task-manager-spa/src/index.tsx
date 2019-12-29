@@ -1,0 +1,42 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+
+import App from './App'
+import * as serviceWorker from './serviceWorker'
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#80cbc4',
+      main: '#009688',
+      dark: '#00695c',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#ce93d8',
+      main: '#9c27b0',
+      dark: '#7b1fa2',
+      contrastText: '#000',
+    },
+  },
+  typography: {
+    htmlFontSize: 10
+  }
+})
+
+const app = (
+  <ThemeProvider theme={theme}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </ThemeProvider>
+)
+
+ReactDOM.render(app, document.getElementById('root'))
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister()
