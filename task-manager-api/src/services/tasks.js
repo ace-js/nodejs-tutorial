@@ -11,7 +11,6 @@ module.exports = Task => ({
         return await Task.create(task)
     },
 
-
     makeUpdateTask: async (id, task) => {
         return await Task.update(id, task)
     },
