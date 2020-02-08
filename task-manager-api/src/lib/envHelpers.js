@@ -1,4 +1,4 @@
-const isProd = () => process.env.ENVIRONMENT !== 'prod'
+const isProd = () => process.env.ENVIRONMENT === 'prod'
 
 module.exports = {
     isProd
